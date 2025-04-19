@@ -503,23 +503,22 @@ function injectConsentHTML(detectedCookies, language = 'en') {
     
     <style>
     /* Main Banner Styles - Updated to match image */
-    .cookie-consent-banner {
+     .cookie-consent-banner {
         position: fixed;
         bottom: 20px;
         left: 20px;
         width: 440px;
-        height: 234px;
         background: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
         z-index: 9999;
-        padding: 20px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        padding: 24px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         display: none;
         transform: translateY(20px);
         opacity: 0;
-        transition: all 0.3s ease;
-        border: 1px solid #eee;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: none;
         overflow: hidden;
     }
 
@@ -529,26 +528,17 @@ function injectConsentHTML(detectedCookies, language = 'en') {
         display: block;
     }
 
-    .cookie-consent-container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .cookie-consent-content {
-        flex: 1;
-    }
-
     .cookie-consent-content h2 {
-        margin: 0 0 12px 0;
+        margin: 0 0 16px 0;
         font-size: 18px;
-        color: #333;
+        color: #1a1a1a;
         font-weight: 600;
-        line-height: 1.3;
+        line-height: 1.4;
+        letter-spacing: -0.2px;
     }
 
     .cookie-consent-content p {
-        margin: 0 0 16px 0;
+        margin: 0 0 24px 0;
         font-size: 14px;
         color: #666;
         line-height: 1.5;
@@ -560,58 +550,68 @@ function injectConsentHTML(detectedCookies, language = 'en') {
         font-size: 13px;
         font-weight: 500;
         display: inline-block;
-        margin-bottom: 18px;
+        margin-bottom: 24px;
+        transition: color 0.2s ease;
     }
 
     .privacy-policy-link:hover {
-        text-decoration: underline;
+        color: #1d6fa5;
     }
 
     .cookie-consent-buttons {
         display: flex;
-        justify-content: space-between;
-        margin-top: auto;
+        gap: 12px;
+        margin-top: 8px;
     }
 
     .cookie-btn {
-        padding: 8px 16px;
-        border-radius: 4px;
+        padding: 12px 20px;
+        border-radius: 8px;
         cursor: pointer;
-        font-weight: 500;
-        font-size: 13px;
-        transition: all 0.2s ease;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         text-align: center;
         border: none;
-        background: none;
+        flex: 1;
+        letter-spacing: 0.2px;
     }
 
     .adjust-btn {
+        background-color: #f8f9fa;
         color: #333;
-        text-decoration: underline;
-        padding-left: 0;
+        border: 1px solid #e0e0e0;
     }
 
     .adjust-btn:hover {
-        color: #000;
+        background-color: #f0f2f5;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .reject-btn {
+        background-color: #fff;
         color: #e74c3c;
-        text-decoration: underline;
+        border: 1px solid #e74c3c;
     }
 
     .reject-btn:hover {
-        color: #c0392b;
+        background-color: #ffeeed;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15);
     }
 
     .accept-btn {
         background-color: #2ecc71;
         color: white;
-        padding: 8px 20px;
+        border: 1px solid #2ecc71;
+        box-shadow: 0 2px 12px rgba(46, 204, 113, 0.3);
     }
 
     .accept-btn:hover {
         background-color: #27ae60;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(46, 204, 113, 0.4);
     }
 
     /* Rest of the CSS remains exactly the same */

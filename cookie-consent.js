@@ -502,53 +502,54 @@ function injectConsentHTML(detectedCookies, language = 'en') {
     </div>
     
     <style>
-    /* Main Banner Styles */
+    /* Main Banner Styles - Updated to match image */
     .cookie-consent-banner {
         position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 20px;
+        left: 20px;
+        width: 440px;
+        height: 234px;
         background: #ffffff;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         z-index: 9999;
-        padding: 20px 0;
+        padding: 20px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         display: none;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        border-top: none;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        border: 1px solid #eee;
+        overflow: hidden;
     }
 
     .cookie-consent-banner.show {
         transform: translateY(0);
+        opacity: 1;
         display: block;
     }
 
     .cookie-consent-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        gap: 15px;
     }
 
     .cookie-consent-content {
-        text-align: center;
-        padding: 0 15px;
+        flex: 1;
     }
 
     .cookie-consent-content h2 {
-        margin: 0 0 10px 0;
-        font-size: 1.3rem;
+        margin: 0 0 12px 0;
+        font-size: 18px;
         color: #333;
         font-weight: 600;
-        letter-spacing: 0.5px;
+        line-height: 1.3;
     }
 
     .cookie-consent-content p {
-        margin: 0 0 15px 0;
-        font-size: 0.95rem;
+        margin: 0 0 16px 0;
+        font-size: 14px;
         color: #666;
         line-height: 1.5;
     }
@@ -556,10 +557,10 @@ function injectConsentHTML(detectedCookies, language = 'en') {
     .privacy-policy-link {
         color: #3498db;
         text-decoration: none;
-        font-size: 0.9rem;
+        font-size: 13px;
         font-weight: 500;
         display: inline-block;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
     }
 
     .privacy-policy-link:hover {
@@ -568,55 +569,52 @@ function injectConsentHTML(detectedCookies, language = 'en') {
 
     .cookie-consent-buttons {
         display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        padding-top: 10px;
-        border-top: 1px solid #eee;
+        justify-content: space-between;
+        margin-top: auto;
     }
 
     .cookie-btn {
         padding: 8px 16px;
-        border: none;
         border-radius: 4px;
         cursor: pointer;
         font-weight: 500;
-        font-size: 0.9rem;
+        font-size: 13px;
         transition: all 0.2s ease;
-        min-width: 100px;
         text-align: center;
+        border: none;
+        background: none;
     }
 
     .adjust-btn {
-        background-color: transparent;
         color: #333;
-        border: 1px solid #ddd;
+        text-decoration: underline;
+        padding-left: 0;
     }
 
     .adjust-btn:hover {
-        background-color: #f5f5f5;
+        color: #000;
     }
 
     .reject-btn {
-        background-color: transparent;
         color: #e74c3c;
-        border: 1px solid #ddd;
+        text-decoration: underline;
     }
 
     .reject-btn:hover {
-        background-color: #ffeeed;
+        color: #c0392b;
     }
 
     .accept-btn {
         background-color: #2ecc71;
         color: white;
+        padding: 8px 20px;
     }
 
     .accept-btn:hover {
         background-color: #27ae60;
     }
 
-    /* Modal Styles */
+    /* Rest of the CSS remains exactly the same */
     .cookie-settings-modal {
         display: none;
         position: fixed;

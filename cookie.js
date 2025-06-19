@@ -1664,10 +1664,15 @@ if (savedLocation) {
 }
 // Function to fetch location data
 
-    async function fetchLocationData() {
+async function fetchLocationData() {
     // Return cached data if available
     const cachedData = sessionStorage.getItem('locationData');
-    if (cachedData) return JSON.parse(cachedData);
+    if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        // Push cached location data to dataLayer
+        pushGeoDataToDataLayer(parsedData);
+        return parsedData;
+    }
 
     const APIs = [
         'https://ipinfo.io/json?token=4c1e5d00e0ac93',
@@ -1687,16 +1692,29 @@ if (savedLocation) {
             
             const payload = await response.json();
             
-            // Standardize the response format
+            // Standardize the response format with all possible fields
             const data = {
-                country: payload.country || payload.country_code,
-                city: payload.city,
-                region: payload.region || payload.regionName,
-                // ... map other fields
+                ip: payload.ip || '',
+                country: payload.country || payload.country_code || '',
+                country_name: payload.country_name || '',
+                region: payload.region || payload.regionName || '',
+                city: payload.city || '',
+                postal: payload.postal || payload.zip || '',
+                latitude: payload.latitude || payload.lat || '',
+                longitude: payload.longitude || payload.lon || payload.lng || '',
+                timezone: payload.timezone || '',
+                org: payload.org || '',
+                asn: payload.asn || '',
+                continent: payload.continent || getContinentFromCountry(payload.country || payload.country_code || ''),
+                hostname: payload.hostname || ''
             };
 
             // Cache the result
             sessionStorage.setItem('locationData', JSON.stringify(data));
+            
+            // Push the geo data to dataLayer
+            pushGeoDataToDataLayer(data);
+            
             return data;
             
         } catch (error) {
@@ -1708,14 +1726,62 @@ if (savedLocation) {
     // All APIs failed - fallback to browser language
     console.warn("All geolocation APIs failed - using fallback");
     const fallbackData = {
+        ip: '',
         country: "Unknown",
-        // ... other defaults
+        country_name: "Unknown",
+        region: "Unknown",
+        city: "Unknown",
+        postal: '',
+        latitude: '',
+        longitude: '',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown",
+        org: '',
+        asn: '',
+        continent: "Unknown",
+        hostname: window.location.hostname
     };
+    
     sessionStorage.setItem('locationData', JSON.stringify(fallbackData));
+    
+    // Push fallback data to dataLayer
+    pushGeoDataToDataLayer(fallbackData);
+    
     return fallbackData;
 }
 
 
+function pushGeoDataToDataLayer(geoData) {
+    window.dataLayer = window.dataLayer || [];
+    const geoDataEvent = {
+        'event': 'geoDataLoaded',
+        'geo_data': {
+            'ip': geoData.ip || '',
+            'country': geoData.country || '',
+            'country_name': geoData.country_name || '',
+            'region': geoData.region || '',
+            'city': geoData.city || '',
+            'postal_code': geoData.postal || '',
+            'coordinates': {
+                'latitude': geoData.latitude || '',
+                'longitude': geoData.longitude || ''
+            },
+            'timezone': geoData.timezone || '',
+            'organization': geoData.org || '',
+            'asn': geoData.asn || '',
+            'continent': geoData.continent || '',
+            'hostname': geoData.hostname || ''
+        },
+        'timestamp': new Date().toISOString()
+    };
+    
+    // Add location_data flat structure for backward compatibility
+    geoDataEvent.location_data = {
+        'country': geoData.country || '',
+        'city': geoData.city || ''
+    };
+    
+    window.dataLayer.push(geoDataEvent);
+}
 
 // Function to map countries to their respective continents
 function getContinentFromCountry(countryCode) {
@@ -4149,17 +4215,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
         if (!sessionStorage.getItem('locationData')) {
             console.log('Fetching fresh location data...');
-            await fetchLocationData();
+            locationData = await fetchLocationData(); // This will now push to dataLayer
         } else {
             console.log('Using cached location data');
             locationData = JSON.parse(sessionStorage.getItem('locationData'));
+            // Push cached data to dataLayer
+            pushGeoDataToDataLayer(locationData);
         }
         
         console.log('Current location data:', locationData);
     } catch (e) {
         console.error('Failed to load location data:', e);
     }
-    
     // Store query parameters on page load
     storeQueryParams();
    

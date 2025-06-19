@@ -1,14 +1,9 @@
 /**
-
 you can change the cookie category description text by this class. like you can change the essential cookies description text size.
   .broadcookiedes {
       font-size: 15px;
     } 
  */
-
-
-// ============== CONFIGURATION SECTION ============== //
-
 
 const EU_COUNTRIES = [
   "AL", // Albania
@@ -224,12 +219,12 @@ geoConfig: {
         },
         
         reject: {
-            background: '#ffffff',
-            color: '#e74c3c',
-            border: '1px solid #e74c3c',
+            background: '#f8f9fa',
+            color: '#333333',
+            border: '1px solid #e0e0e0',
             hover: {
-                background: '#ffeeed',
-                color: '#e74c3c',
+                background: '#f8f9fa',
+                color: '#333333',
                 transform: 'translateY(-1px)'
             }
         },
@@ -246,9 +241,9 @@ geoConfig: {
         },
         
         save: {
-            background: '#3498db',
-            color: '#ffffff',
-            border: '1px solid #3498db',
+            background: '#f8f9fa',
+            color: '#333333',
+            border: '1px solid #e0e0e0',
             hover: {
                 background: '#2980b9',
                 color: '#ffffff',

@@ -261,7 +261,7 @@ geoConfig: {
         borderRadius: '50%',
         boxShadow: '0 6px 20px rgba(0, 0, 0, 0.2)',
         hover: {
-            background: '#27ae60',
+            background: '#1177d0',
             transform: 'translateY(-3px) scale(1.05)',
             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)'
         }

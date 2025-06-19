@@ -151,7 +151,7 @@ geoConfig: {
     blockedCountries: [], // Never show in these countries
     blockedRegions: [], // Never show in these regions
     blockedCities: [], // Never show in these cities
-    euOnly: false, // NEW: Set to true to only show in EU countries
+    euOnly: true, // NEW: Set to true to only show in EU countries
     specificRegions: [] // NEW: Can specify 'EU' or other regions
 },
     
@@ -1663,62 +1663,59 @@ if (savedLocation) {
     });
 }
 // Function to fetch location data
-async function fetchLocationData() {
-    // Skip if we already have valid location data (optional safety check)
-    if (locationData.country && locationData.country !== 'Unknown') {
-        return locationData;
+
+    async function fetchLocationData() {
+    // Return cached data if available
+    const cachedData = sessionStorage.getItem('locationData');
+    if (cachedData) return JSON.parse(cachedData);
+
+    const APIs = [
+        'https://ipinfo.io/json?token=4c1e5d00e0ac93',
+        'https://ipapi.co/json/',
+        'https://geolocation-db.com/json/'
+    ];
+
+    for (const apiUrl of APIs) {
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 3000);
+            
+            const response = await fetch(apiUrl, { signal: controller.signal });
+            clearTimeout(timeout);
+            
+            if (!response.ok) continue;
+            
+            const payload = await response.json();
+            
+            // Standardize the response format
+            const data = {
+                country: payload.country || payload.country_code,
+                city: payload.city,
+                region: payload.region || payload.regionName,
+                // ... map other fields
+            };
+
+            // Cache the result
+            sessionStorage.setItem('locationData', JSON.stringify(data));
+            return data;
+            
+        } catch (error) {
+            console.log(`Failed with ${apiUrl}:`, error);
+            continue;
+        }
     }
 
-    try {
-        const response = await fetch('https://ipinfo.io/json?token=4c1e5d00e0ac93');
-        if (!response.ok) throw new Error('Failed to fetch location');
-        
-        const payload = await response.json();
-        
-        // Update locationData with actual values
-        locationData = {
-            continent: getContinentFromCountry(payload.country) || "Unknown",
-            country: payload.country || "Unknown",
-            city: payload.city || "Unknown",
-            zip: payload.postal || "Unknown",
-            ip: payload.ip || "Unknown",
-            street: payload.loc || "Unknown",
-            region: payload.region || "Unknown",
-            timezone: payload.timezone || "Unknown",
-            isp: payload.org || "Unknown",
-            language: (navigator.language || "Unknown").split("-")[0]
-        };
-
-        // Save to session storage
-        sessionStorage.setItem('locationData', JSON.stringify(locationData));
-        
-        // Push to dataLayer - THIS IS WHERE IT HAPPENS NOW
-        window.dataLayer.push({
-            'event': 'locationRetrieved',
-            'location_data': locationData,
-            'timestamp': new Date().toISOString()
-        });
-        
-        return locationData;
-        
-    } catch (error) {
-        console.error('Error fetching location:', error);
-        // Set defaults if API fails
-        locationData = {
-            continent: "Unknown",
-            country: "Unknown",
-            city: "Unknown",
-            zip: "Unknown",
-            ip: "Unknown",
-            street: "Unknown",
-            region: "Unknown",
-            timezone: "Unknown",
-            isp: "Unknown",
-            language: (navigator.language || "Unknown").split("-")[0]
-        };
-        return locationData;
-    }
+    // All APIs failed - fallback to browser language
+    console.warn("All geolocation APIs failed - using fallback");
+    const fallbackData = {
+        country: "Unknown",
+        // ... other defaults
+    };
+    sessionStorage.setItem('locationData', JSON.stringify(fallbackData));
+    return fallbackData;
 }
+
+
 
 // Function to map countries to their respective continents
 function getContinentFromCountry(countryCode) {
@@ -4149,9 +4146,19 @@ function loadPerformanceCookies() {
 // Main execution flow
 document.addEventListener('DOMContentLoaded', async function() {
     // Ensure location data is loaded first
-    if (!sessionStorage.getItem('locationData')) {
-        await fetchLocationData();
-    }  
+    try {
+        if (!sessionStorage.getItem('locationData')) {
+            console.log('Fetching fresh location data...');
+            await fetchLocationData();
+        } else {
+            console.log('Using cached location data');
+            locationData = JSON.parse(sessionStorage.getItem('locationData'));
+        }
+        
+        console.log('Current location data:', locationData);
+    } catch (e) {
+        console.error('Failed to load location data:', e);
+    }
     
     // Store query parameters on page load
     storeQueryParams();
@@ -4243,5 +4250,3 @@ if (typeof window !== 'undefined') {
         config: config
     };
 }
-
-

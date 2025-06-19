@@ -255,7 +255,7 @@ geoConfig: {
     // Floating button styling
     floatingButtonStyle: {
         size: '50px',
-        background: '#2ecc71',
+        background: '#1177d0 ',
         iconColor: '#ffffff',
         border: '2px solid #ffffff',
         borderRadius: '50%',
@@ -2701,6 +2701,7 @@ function injectConsentHTML(detectedCookies, language = 'en') {
         font-weight: 500;
         display: inline-block;
         transition: color 0.2s ease;
+        display: none;
     }
 
     .see-analytics-link:hover {

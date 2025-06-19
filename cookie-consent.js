@@ -245,7 +245,7 @@ geoConfig: {
             color: '#333333',
             border: '1px solid #e0e0e0',
             hover: {
-                background: '#2980b9',
+                background: '#f8f9fa',
                 color: '#ffffff',
                 transform: 'translateY(-1px)'
             }
@@ -2360,7 +2360,7 @@ function injectConsentHTML(detectedCookies, language = 'en') {
         background-color: ${config.buttonStyle.adjust.hover.background};
         color: ${config.buttonStyle.adjust.hover.color};
         transform: ${config.buttonStyle.adjust.hover.transform};
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        
     }
 
     .main-reject-btn {
@@ -2373,7 +2373,7 @@ function injectConsentHTML(detectedCookies, language = 'en') {
         background-color: ${config.buttonStyle.reject.hover.background};
         color: ${config.buttonStyle.reject.hover.color};
         transform: ${config.buttonStyle.reject.hover.transform};
-        box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15);
+        
     }
 
  .main-accept-button {

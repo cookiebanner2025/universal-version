@@ -466,101 +466,311 @@ function setDefaultUetConsent() {
 
 // Enhanced cookie database with detailed descriptions
 const cookieDatabase = {
-    // Existing cookies
+    // ========== ADVERTISING COOKIES ==========
+    // Google Advertising
     '_gcl': { category: 'advertising', duration: '90 days', description: 'Google Click Identifier - Tracks ad clicks and conversions' },
     '_gcl_au': { category: 'advertising', duration: '90 days', description: 'Google Ads conversion tracking' },
     'gclid': { category: 'advertising', duration: '30 days', description: 'Google Click ID - Tracks PPC ad clicks' },
     'IDE': { category: 'advertising', duration: '390 days', description: 'Google DoubleClick - Used for retargeting' },
     'NID': { category: 'advertising', duration: '180 days', description: 'Google Ads preferences' },
     '_gat_gtag': { category: 'advertising', duration: '1 minute', description: 'Google Tag Manager throttle' },
+    'DSID': { category: 'advertising', duration: '14 days', description: 'Google Display & Video 360 ID' },
+    'FPLC': { category: 'advertising', duration: '20 hours', description: 'Google Floodlight counter' },
+    
+    // Microsoft Advertising
     'msclkid': { category: 'advertising', duration: '30 days', description: 'Microsoft Click ID - Tracks ad clicks' },
     '_uetmsdns': { category: 'advertising', duration: 'Session', description: 'Microsoft UET consent mode cookie' },
     'MUID': { category: 'advertising', duration: '390 days', description: 'Microsoft Universal ID' },
     '_uetsid': { category: 'advertising', duration: '1 day', description: 'Bing Ads session ID' },
-  '_uetmsclkid': { 
-        category: 'advertising', 
-        duration: 'Session', 
-        description: 'Microsoft UET click ID - Tracks ad clicks for conversion' 
-    },
-  '_uetmsd': { 
-        category: 'advertising', 
-        duration: 'Session', 
-        description: 'Microsoft UET domain setting - Enables cross-domain tracking' 
-    },
-    'MUIDB': { 
-        category: 'advertising', 
-        duration: '390 days', 
-        description: 'Microsoft Universal ID backup - Fallback identifier' 
-    },
+    '_uetmsclkid': { category: 'advertising', duration: 'Session', description: 'Microsoft UET click ID' },
+    '_uetmsd': { category: 'advertising', duration: 'Session', description: 'Microsoft UET domain setting' },
+    'MUIDB': { category: 'advertising', duration: '390 days', description: 'Microsoft Universal ID backup' },
     '_uetvid': { category: 'advertising', duration: '390 days', description: 'Bing Ads visitor ID' },
+    '_uetsid_exp': { category: 'advertising', duration: '1 day', description: 'Bing Ads session expiration' },
+    
+    // Facebook/Meta Advertising
     '_fbp': { category: 'advertising', duration: '90 days', description: 'Facebook Pixel - Conversion tracking' },
     'fr': { category: 'advertising', duration: '90 days', description: 'Facebook browser ID' },
     'datr': { category: 'advertising', duration: '730 days', description: 'Facebook browser identification' },
+    'lu': { category: 'advertising', duration: '2 years', description: 'Facebook login status' },
+    'xs': { category: 'advertising', duration: '90 days', description: 'Facebook session ID' },
+    'c_user': { category: 'advertising', duration: '90 days', description: 'Facebook user ID' },
+    'm_user': { category: 'advertising', duration: '90 days', description: 'Facebook mobile user ID' },
+    'pl': { category: 'advertising', duration: '90 days', description: 'Facebook platform login' },
+    'dbln': { category: 'advertising', duration: '2 years', description: 'Facebook device-based login' },
+    '_fbc': { category: 'advertising', duration: '2 years', description: 'Facebook click ID' },
+    'usida': { category: 'advertising', duration: 'Session', description: 'Facebook targeted advertising' },
+    'act': { category: 'advertising', duration: 'Session', description: 'Facebook current session activity' },
+    
+    // TikTok Advertising
     '_ttp': { category: 'advertising', duration: '390 days', description: 'TikTok Pixel tracking' },
     'ttclid': { category: 'advertising', duration: '30 days', description: 'TikTok Click ID' },
     'tt_sessionid': { category: 'advertising', duration: '1 day', description: 'TikTok session' },
+    'tt_medium': { category: 'advertising', duration: '30 days', description: 'TikTok traffic source' },
+    'tt_campaign': { category: 'advertising', duration: '30 days', description: 'TikTok campaign ID' },
+    
+    // LinkedIn Advertising
     'lidc': { category: 'advertising', duration: '1 day', description: 'LinkedIn Ads routing' },
     'bcookie': { category: 'advertising', duration: '730 days', description: 'LinkedIn Browser ID' },
     'li_sugr': { category: 'advertising', duration: '90 days', description: 'LinkedIn user tracking' },
+    'bscookie': { category: 'advertising', duration: '730 days', description: 'LinkedIn secure browser ID' },
+    'UserMatchHistory': { category: 'advertising', duration: '30 days', description: 'LinkedIn Ads matching' },
+    'lang': { category: 'advertising', duration: 'Session', description: 'LinkedIn language setting' },
+    
+    // Pinterest Advertising
     '_pinterest_ct_ua': { category: 'advertising', duration: '365 days', description: 'Pinterest Click Tracking' },
     '_pinterest_sess': { category: 'advertising', duration: '1 day', description: 'Pinterest session' },
     'cm_sub': { category: 'advertising', duration: '365 days', description: 'Pinterest conversion' },
-    'obuid': { category: 'advertising', duration: '365 days', description: 'Outbrain user ID' },
-    'obcl': { category: 'advertising', duration: '30 days', description: 'Outbrain click tracking' },
+    '_pin_unauth': { category: 'advertising', duration: '1 year', description: 'Pinterest unauthenticated user' },
+    '_auth': { category: 'advertising', duration: '1 year', description: 'Pinterest authentication' },
+    '_pinterest_referrer': { category: 'advertising', duration: '1 day', description: 'Pinterest referral source' },
+    
+    // Twitter Advertising
     'personalization_id': { category: 'advertising', duration: '730 days', description: 'Twitter personalization' },
     'guest_id': { category: 'advertising', duration: '730 days', description: 'Twitter guest tracking' },
+    'ct0': { category: 'advertising', duration: '6 hours', description: 'Twitter CSRF token' },
+    'auth_token': { category: 'advertising', duration: 'Session', description: 'Twitter authentication' },
+    'twid': { category: 'advertising', duration: '730 days', description: 'Twitter user ID' },
+    
+    // Snapchat Advertising
     'sc_at': { category: 'advertising', duration: '365 days', description: 'Snapchat Ads tracking' },
     '_scid': { category: 'advertising', duration: '365 days', description: 'Snapchat user ID' },
-    'rdt_uuid': { category: 'advertising', duration: '365 days', description: 'Reddit unique user ID' },
-    'session_tracker': { category: 'advertising', duration: '1 day', description: 'Reddit session' },
-    'criteo': { category: 'advertising', duration: '365 days', description: 'Criteo retargeting' },
-    'uid': { category: 'advertising', duration: '365 days', description: 'Criteo user ID' },
-    '__adroll': { category: 'advertising', duration: '365 days', description: 'AdRoll tracking' },
-    '__ar_v4': { category: 'advertising', duration: '365 days', description: 'AdRoll segmentation' },
-    'ad-id': { category: 'advertising', duration: '270 days', description: 'Amazon Ad System ID' },
-    'ad-privacy': { category: 'advertising', duration: '730 days', description: 'Amazon Ad Preferences' },
+    '_sctr': { category: 'advertising', duration: '365 days', description: 'Snapchat click tracking' },
+    'snap_ga': { category: 'advertising', duration: '90 days', description: 'Snapchat Google Analytics' },
+    
+    // ========== ANALYTICS COOKIES ==========
+    // Google Analytics
+    '_ga': { category: 'analytics', duration: '730 days', description: 'Google Analytics client ID' },
+    '_gid': { category: 'analytics', duration: '1 day', description: 'Google Analytics user ID' },
+    '_gat': { category: 'analytics', duration: '1 minute', description: 'Google Analytics throttle' },
+    '_gat_UA-': { category: 'analytics', duration: '1 minute', description: 'Google Analytics account throttle' },
+    '_ga_': { category: 'analytics', duration: '730 days', description: 'Google Analytics persistent ID' },
+    '_dc_gtm_': { category: 'analytics', duration: '1 minute', description: 'Google Tag Manager' },
+    
+    // Microsoft Clarity
+    '_clck': { category: 'analytics', duration: '365 days', description: 'Microsoft Clarity user ID' },
+    '_clsk': { category: 'analytics', duration: '1 day', description: 'Microsoft Clarity session linkage' },
+    '_cltk': { category: 'analytics', duration: 'Session', description: 'Microsoft Clarity session tracking' },
+    'CLID': { category: 'analytics', duration: '365 days', description: 'Microsoft Clarity client ID' },
+    'ANONCHK': { category: 'analytics', duration: '1 day', description: 'Microsoft Clarity anonymous check' },
+    'SM': { category: 'analytics', duration: 'Session', description: 'Microsoft Clarity session marker' },
+    
+    // Adobe Analytics
+    's_cc': { category: 'analytics', duration: 'Session', description: 'Adobe Analytics settings' },
+    's_sq': { category: 'analytics', duration: 'Session', description: 'Adobe Analytics clickstream' },
+    'AMCV_': { category: 'analytics', duration: '730 days', description: 'Adobe Marketing Cloud ID' },
+    's_vi': { category: 'analytics', duration: '730 days', description: 'Adobe Omniture visitor ID' },
+    'demdex': { category: 'analytics', duration: '180 days', description: 'Adobe Audience Manager' },
+    
+    // Hotjar
+    '_hjClosedSurveyInvites': { category: 'analytics', duration: '365 days', description: 'Hotjar closed surveys' },
+    '_hjDonePolls': { category: 'analytics', duration: '365 days', description: 'Hotjar completed polls' },
+    '_hjMinimizedPolls': { category: 'analytics', duration: '365 days', description: 'Hotjar minimized polls' },
+    '_hjShownFeedbackMessage': { category: 'analytics', duration: '365 days', description: 'Hotjar feedback status' },
+    '_hjid': { category: 'analytics', duration: '365 days', description: 'Hotjar user ID' },
+    '_hjIncludedInPageviewSample': { category: 'analytics', duration: '30 minutes', description: 'Hotjar pageview tracking' },
+    
+    // HubSpot Analytics
+    'hubspotutk': { category: 'analytics', duration: '365 days', description: 'HubSpot visitor identity' },
+    '__hssc': { category: 'analytics', duration: '30 minutes', description: 'HubSpot session' },
+    '__hssrc': { category: 'analytics', duration: 'Session', description: 'HubSpot new session' },
+    '__hstc': { category: 'analytics', duration: '730 days', description: 'HubSpot campaign tracking' },
+    'hsfirstvisit': { category: 'analytics', duration: '730 days', description: 'HubSpot first visit' },
+    
+    // ========== FUNCTIONAL COOKIES ==========
+    'PHPSESSID': { category: 'functional', duration: 'Session', description: 'PHP session identifier' },
+    'cookie_consent': { category: 'functional', duration: '365 days', description: 'Cookie consent preferences' },
+    'wp-settings-': { category: 'functional', duration: '1 year', description: 'WordPress user settings' },
+    'wp-settings-time-': { category: 'functional', duration: '1 year', description: 'WordPress settings timestamp' },
+    'wordpress_test_cookie': { category: 'functional', duration: 'Session', description: 'WordPress test cookie' },
+    'wfvt_': { category: 'functional', duration: '30 minutes', description: 'Wordfence security cookie' },
+    
+    // Facebook Functional
+    'wd': { category: 'functional', duration: 'Session', description: 'Facebook window dimensions' },
+    'presence': { category: 'functional', duration: 'Session', description: 'Facebook chat status' },
+    'sb': { category: 'functional', duration: '2 years', description: 'Facebook browser identification' },
+    
+    // ========== ESSENTIAL COOKIES ==========
+    'AWSALB': { category: 'essential', duration: '7 days', description: 'AWS load balancer' },
+    'AWSALBCORS': { category: 'essential', duration: '7 days', description: 'AWS CORS load balancer' },
+    '__cfduid': { category: 'essential', duration: '30 days', description: 'Cloudflare security' },
+    '__cf_bm': { category: 'essential', duration: '30 minutes', description: 'Cloudflare bot management' },
+    'JSESSIONID': { category: 'essential', duration: 'Session', description: 'Java session ID' },
+    'ARRAffinity': { category: 'essential', duration: 'Session', description: 'Azure load balancer' },
+    
+    // ========== OTHER PLATFORMS ==========
+    // Shopify
+    '_shopify_y': { category: 'analytics', duration: '1 year', description: 'Shopify analytics' },
+    '_shopify_s': { category: 'analytics', duration: '30 minutes', description: 'Shopify session' },
+    '_shopify_sa_p': { category: 'advertising', duration: '30 minutes', description: 'Shopify affiliate' },
+    '_shopify_fs': { category: 'analytics', duration: '2 years', description: 'Shopify first visit' },
+    '_shopify_uniq': { category: 'analytics', duration: '1 day', description: 'Shopify unique visitor' },
+    
+    // Taboola
+    't_gid': { category: 'advertising', duration: '365 days', description: 'Taboola user ID' },
+    't_sessionid': { category: 'advertising', duration: 'Session', description: 'Taboola session' },
+    'taboola_usg': { category: 'advertising', duration: '30 days', description: 'Taboola user segments' },
+    
+    // Outbrain
+    'obuid': { category: 'advertising', duration: '365 days', description: 'Outbrain user ID' },
+    'obcl': { category: 'advertising', duration: '30 days', description: 'Outbrain click tracking' },
+    'outbrain_cid': { category: 'advertising', duration: '30 days', description: 'Outbrain click ID' },
+    
+    // Verizon Media
+    'TUUID': { category: 'advertising', duration: '365 days', description: 'Verizon user ID' },
+    'TUUID_TIMESTAMP': { category: 'advertising', duration: '365 days', description: 'Verizon timestamp' },
+    
+    // Quantcast
+    'd': { category: 'advertising', duration: '3 months', description: 'Quantcast measurement' },
+    'qc_shared': { category: 'advertising', duration: '3 months', description: 'Quantcast shared data' },
+    
+    // Liveramp
+    '_cc_cc': { category: 'advertising', duration: '180 days', description: 'LiveRamp identity' },
+    '_cc_id': { category: 'advertising', duration: '180 days', description: 'LiveRamp cookie ID' },
+    
+    // Yandex
     'yandexuid': { category: 'advertising', duration: '365 days', description: 'Yandex Metrica user ID' },
     'ymex': { category: 'advertising', duration: '365 days', description: 'Yandex Metrica visitor' },
+    '_ym_uid': { category: 'analytics', duration: '365 days', description: 'Yandex Metrica unique ID' },
+    '_ym_d': { category: 'analytics', duration: '365 days', description: 'Yandex Metrica first visit' },
+    
+    // Quora
     'm-b': { category: 'advertising', duration: '365 days', description: 'Quora browser ID' },
     'm-uid': { category: 'advertising', duration: '365 days', description: 'Quora user ID' },
+    
+    // StackAdapt
     'sadb': { category: 'advertising', duration: '30 days', description: 'StackAdapt bidding data' },
     'sadr': { category: 'advertising', duration: '30 days', description: 'StackAdapt retargeting' },
+    
+    // The Trade Desk
     'TDID': { category: 'advertising', duration: '365 days', description: 'The Trade Desk ID' },
     'TDCPM': { category: 'advertising', duration: '365 days', description: 'The Trade Desk CPM data' },
+    
+    // MediaMath
     'mmapi': { category: 'advertising', duration: '30 days', description: 'MediaMath API tracking' },
     'mmdata': { category: 'advertising', duration: '30 days', description: 'MediaMath campaign data' },
-    '_ga': { category: 'analytics', duration: '730 days', description: 'Google Analytics' },
-    '_gid': { category: 'analytics', duration: '1 day', description: 'Google Analytics' },
-    '_gat': { category: 'analytics', duration: '1 minute', description: 'Google Analytics throttle' },
-    'PHPSESSID': { category: 'functional', duration: 'Session', description: 'PHP session' },
-    'cookie_consent': { category: 'functional', duration: '365 days', description: 'Consent preferences' },
-
-    // New Facebook cookies from your list
-    'lu': { category: 'advertising', duration: '2 years', description: 'Used to record whether the person chose to remain logged in (User ID and miscellaneous log in information)' },
-    'xs': { category: 'advertising', duration: '90 days', description: 'Used with c_user cookie to authenticate identity to Facebook (Session ID, creation time, authentication value)' },
-    'c_user': { category: 'advertising', duration: '90 days', description: 'Used with xs cookie to authenticate identity to Facebook (User ID)' },
-    'm_user': { category: 'advertising', duration: '90 days', description: 'Used to authenticate identity on Facebook mobile website (Email, User ID, authentication value)' },
-    'pl': { category: 'advertising', duration: '90 days', description: 'Records that a device or browser logged in via Facebook platform' },
-    'dbln': { category: 'advertising', duration: '2 years', description: 'Used to enable device-based logins (Login authentication values)' },
-    'aks': { category: 'advertising', duration: '30 days', description: 'Determines login state of a person visiting accountkit.com (Account kit access token)' },
-    'aksb': { category: 'advertising', duration: '30 minutes', description: 'Authenticates logins using Account Kit (Request time value)' },
-    'sfau': { category: 'advertising', duration: '1 day', description: 'Optimizes recovery flow after failed login attempts (Encrypted user ID, contact point, time stamp)' },
-    'ick': { category: 'advertising', duration: '2 years', description: 'Stores an encryption key used to encrypt cookies' },
-    'csm': { category: 'advertising', duration: '90 days', description: 'Insecure indicator' },
-    's': { category: 'advertising', duration: '90 days', description: 'Facebook browser identification, authentication, marketing cookies' },
-    'sb': { category: 'advertising', duration: '2 years', description: 'Facebook browser identification, authentication, marketing cookies' },
-    '_fbc': { category: 'advertising', duration: '2 years', description: 'Used for Facebook advertising products like real time bidding' },
-    'oo': { category: 'advertising', duration: '5 years', description: 'Ad opt-out cookie' },
-    'ddid': { category: 'advertising', duration: '28 days', description: 'Used to open specific location in advertiser app upon installation' },
-    'locale': { category: 'advertising', duration: '7 days', description: 'Contains display locale of last logged in user' },
-    'js_ver': { category: 'advertising', duration: '7 days', description: 'Records age of Facebook javascript files' },
-    'rc': { category: 'advertising', duration: '7 days', description: 'Used to optimize site performance for advertisers' },
-    'campaign_click_url': { category: 'advertising', duration: '30 days', description: 'Records Facebook URL landed on after clicking an ad' },
-    'usida': { category: 'advertising', duration: 'Session', description: 'Collects browser and unique identifier for targeted advertising' },
     
-    // Facebook functional cookies
-    'wd': { category: 'functional', duration: 'Session', description: 'Stores browser window dimensions for page rendering optimization' },
-    'presence': { category: 'functional', duration: 'Session', description: 'Contains user chat state' }
+    // Criteo
+    'criteo': { category: 'advertising', duration: '365 days', description: 'Criteo retargeting' },
+    'uid': { category: 'advertising', duration: '365 days', description: 'Criteo user ID' },
+    
+    // AdRoll
+    '__adroll': { category: 'advertising', duration: '365 days', description: 'AdRoll tracking' },
+    '__ar_v4': { category: 'advertising', duration: '365 days', description: 'AdRoll segmentation' },
+    
+    // Amazon Advertising
+    'ad-id': { category: 'advertising', duration: '270 days', description: 'Amazon Ad System ID' },
+    'ad-privacy': { category: 'advertising', duration: '730 days', description: 'Amazon Ad Preferences' },
+    'adblk': { category: 'advertising', duration: '30 days', description: 'Amazon Ad Block detection' },
+    
+    // New Relic
+    'NRBA_POOL': { category: 'analytics', duration: 'Session', description: 'New Relic browser monitoring' },
+    'NRBA_SESSION': { category: 'analytics', duration: 'Session', description: 'New Relic session tracking' },
+    
+    // Optimizely
+    'optimizelyEndUserId': { category: 'analytics', duration: '180 days', description: 'Optimizely user ID' },
+    'optimizelySegments': { category: 'analytics', duration: '180 days', description: 'Optimizely segmentation' },
+    
+    // Vimeo
+    'vuid': { category: 'analytics', duration: '2 years', description: 'Vimeo analytics ID' },
+    'player': { category: 'functional', duration: '1 year', description: 'Vimeo player preferences' },
+    
+    // YouTube
+    'VISITOR_INFO1_LIVE': { category: 'functional', duration: '180 days', description: 'YouTube bandwidth estimation' },
+    'YSC': { category: 'functional', duration: 'Session', description: 'YouTube session cookie' },
+    'PREF': { category: 'functional', duration: '2 years', description: 'YouTube preferences' },
+    
+    // Dailymotion
+    'dmvk': { category: 'analytics', duration: 'Session', description: 'Dailymotion visitor key' },
+    'dm_last_visit': { category: 'analytics', duration: '1 year', description: 'Dailymotion last visit' },
+    
+    // Trustpilot
+    'trustpilot_customer_auth': { category: 'functional', duration: 'Session', description: 'Trustpilot authentication' },
+    'trustpilot_machine_id': { category: 'analytics', duration: '1 year', description: 'Trustpilot device ID' },
+    
+    // Zendesk
+    '__zlcmid': { category: 'functional', duration: '1 year', description: 'Zendesk chat identification' },
+    '__zlcprivacy': { category: 'functional', duration: '1 year', description: 'Zendesk privacy preferences' },
+    
+    // Freshchat
+    '_fw_crm_v': { category: 'functional', duration: '1 year', description: 'Freshchat visitor ID' },
+    '_fw_l2_b': { category: 'functional', duration: 'Session', description: 'Freshchat session' },
+    
+    // Drift
+    'drift_aid': { category: 'functional', duration: '2 years', description: 'Drift anonymous ID' },
+    'drift_campaign_refresh': { category: 'functional', duration: 'Session', description: 'Drift campaign state' },
+    
+    // Intercom
+    'intercom-id': { category: 'functional', duration: '9 months', description: 'Intercom user ID' },
+    'intercom-session': { category: 'functional', duration: '7 days', description: 'Intercom session' },
+    
+    // Segment
+    'ajs_anonymous_id': { category: 'analytics', duration: '1 year', description: 'Segment anonymous ID' },
+    'ajs_user_id': { category: 'analytics', duration: '1 year', description: 'Segment user ID' },
+    
+    // Snowplow
+    '_sp_id': { category: 'analytics', duration: '2 years', description: 'Snowplow visitor ID' },
+    '_sp_ses': { category: 'analytics', duration: '30 minutes', description: 'Snowplow session ID' },
+    
+    // Matomo
+    '_pk_id': { category: 'analytics', duration: '1 year', description: 'Matomo visitor ID' },
+    '_pk_ses': { category: 'analytics', duration: '30 minutes', description: 'Matomo session ID' },
+    
+    // Crazy Egg
+    'is_returning': { category: 'analytics', duration: '5 years', description: 'Crazy Egg returning visitor' },
+    'ce_need_secure': { category: 'functional', duration: 'Session', description: 'Crazy Egg security' },
+    
+    // Mouseflow
+    'mf_[websiteid]': { category: 'analytics', duration: '90 days', description: 'Mouseflow session' },
+    'mf_user': { category: 'analytics', duration: '90 days', description: 'Mouseflow user ID' },
+    
+    // FullStory
+    '_fsuid': { category: 'analytics', duration: '1 year', description: 'FullStory user ID' },
+    '_fssid': { category: 'analytics', duration: 'Session', description: 'FullStory session ID' },
+    
+    // Pardot
+    'visitor_id': { category: 'advertising', duration: '10 years', description: 'Pardot visitor ID' },
+    'visitor_id-hash': { category: 'advertising', duration: '10 years', description: 'Pardot hashed visitor ID' },
+    
+    // Marketo
+    '_mkto_trk': { category: 'advertising', duration: '2 years', description: 'Marketo tracking' },
+    'BIGipServerpool_': { category: 'functional', duration: 'Session', description: 'Marketo load balancing' },
+    
+    // Eloqua
+    'ELOQUA': { category: 'advertising', duration: '2 years', description: 'Eloqua visitor ID' },
+    'ELQSTATUS': { category: 'advertising', duration: '2 years', description: 'Eloqua status' },
+    
+    // Salesforce
+    'sid': { category: 'essential', duration: 'Session', description: 'Salesforce session ID' },
+    'clientSrc': { category: 'functional', duration: '1 year', description: 'Salesforce client source' },
+    
+    // Tealium
+    'utag_main': { category: 'analytics', duration: '1 year', description: 'Tealium main cookie' },
+    'utag_env': { category: 'analytics', duration: 'Session', description: 'Tealium environment' },
+    
+    // OneTrust
+    'OptanonAlertBoxClosed': { category: 'functional', duration: '365 days', description: 'OneTrust consent banner closed' },
+    'OptanonConsent': { category: 'functional', duration: '365 days', description: 'OneTrust consent preferences' },
+    
+    // Cookiebot
+    'CookieConsent': { category: 'functional', duration: '1 year', description: 'Cookiebot consent status' },
+    'cookietest': { category: 'functional', duration: 'Session', description: 'Cookiebot test' },
+    
+    // Usercentrics
+    'uc_user_interaction': { category: 'functional', duration: '1 year', description: 'Usercentrics user consent' },
+    'uc_user_interaction_ts': { category: 'functional', duration: '1 year', description: 'Usercentrics consent timestamp' },
+    
+    // TrustArc
+    'notice_gdpr_prefs': { category: 'functional', duration: '1 year', description: 'TrustArc GDPR preferences' },
+    'notice_behavior': { category: 'functional', duration: '1 year', description: 'TrustArc notice behavior' },
+    
+    // Quantcast Choice
+    'quantcast_choice': { category: 'functional', duration: '1 year', description: 'Quantcast consent' },
+    'quantcast2.quantcast': { category: 'functional', duration: '1 year', description: 'Quantcast preferences' },
+    
+    // IAB TCF
+    'euconsent-v2': { category: 'functional', duration: '1 year', description: 'IAB TCF consent string' },
+    'eupubconsent-v2': { category: 'functional', duration: '1 year', description: 'IAB TCF publisher consent' }
 };
 
 // Language translations (keeping only en and fr as requested)

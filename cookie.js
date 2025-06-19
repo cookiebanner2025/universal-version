@@ -151,8 +151,8 @@ geoConfig: {
     blockedCountries: [], // Never show in these countries
     blockedRegions: [], // Never show in these regions
     blockedCities: [], // Never show in these cities
-    euOnly: true, // NEW: Set to true to only show in EU countries
-    specificRegions: ['EU'] // NEW: Can specify 'EU' or other regions
+    euOnly: false, // NEW: Set to true to only show in EU countries
+    specificRegions: [] // NEW: Can specify 'EU' or other regions
 },
     
     // Analytics configuration

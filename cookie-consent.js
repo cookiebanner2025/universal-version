@@ -208,11 +208,11 @@ geoConfig: {
         transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
         
        accept: {
-    background: '#2ecc71 !important',
+    background: '#1177d0 !important',
     color: '#ffffff !important',
-    border: '1px solid #2ecc71 !important',
+    border: '1px solid #1177d0 !important',
     hover: {
-        background: '#27ae60 !important',
+        background: '#1177d0 !important',
         color: '#ffffff !important',
         transform: 'translateY(-1px) !important'
     }
@@ -2380,14 +2380,14 @@ function injectConsentHTML(detectedCookies, language = 'en') {
     background-color: ${config.buttonStyle.accept.background};
     color: ${config.buttonStyle.accept.color};
     border: ${config.buttonStyle.accept.border};
-    box-shadow: 0 2px 12px rgba(46, 204, 113, 0.3);
+    
 }
 
 .main-accept-button:hover {
     background-color: ${config.buttonStyle.accept.hover.background};
     color: ${config.buttonStyle.accept.hover.color};
     transform: ${config.buttonStyle.accept.hover.transform};
-    box-shadow: 0 4px 16px rgba(46, 204, 113, 0.4);
+    
 }
 
     .main-save-btn {

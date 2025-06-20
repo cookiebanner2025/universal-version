@@ -145,7 +145,7 @@ const config = {
     // Geo-targeting configuration
  // In your config object, update the geoConfig section:
 geoConfig: {
-    allowedCountries: [], // Only show in these countries (empty = all allowed)
+    allowedCountries: ['GB'], // Only show in these countries (empty = all allowed)
     allowedRegions: [], // Only show in these regions
     allowedCities: [], // Only show in these cities
     blockedCountries: [], // Never show in these countries

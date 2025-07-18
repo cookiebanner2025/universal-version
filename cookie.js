@@ -808,7 +808,7 @@ const translations = {
     passwordIncorrect: "Incorrect credentials",
     dashboardTitle: "Cookie Consent Dashboard",
     seeAnalytics: "View Consent Statistics"
-}
+},
     fr: {
         title: "Nous respectons votre vie privée",
         description: "Nous utilisons des cookies pour améliorer votre expérience, fournir des publicités ou du contenu personnalisé et analyser notre trafic. En cliquant sur \"Tout accepter\", vous consentez à l'utilisation de cookies.",

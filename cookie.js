@@ -777,7 +777,7 @@ const cookieDatabase = {
 const translations = {
     en: {
         title: "We value your privacy",
-        description: "We use cookies to improve your browsing experience, provide personalized ads or content, and analyze our traffic. By clicking \"Accept All,\" you consent to the use of cookies.",
+        description: "We use cookies, including from Google, for analytics and ads. By clicking 'Accept,' you consent to our use of cookies and Google's processing of data as described in our <a href='/policies/privacy-policy'>Privacy Policy</a> and <a href='https://policies.google.com/privacy' target='_blank'>Google's Privacy Policy</a>.",
         privacy: "Privacy Policy",
         customize: "Adjust",
         reject: "Reject all",

@@ -91,7 +91,7 @@ const config = {
         // OR use this alternative approach if you prefer to hide on specific URLs
         hideOnUrls: [
             // '/home',
-            '/shop/*'
+           // '/shop/*'
         ]
     },
 
@@ -4459,5 +4459,6 @@ if (typeof window !== 'undefined') {
         config: config
     };
 }
+
 
 
